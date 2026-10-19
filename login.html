@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MUST Online Application Portal - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="logo-circle">
+            <img src="logo.png" alt="MUST Logo">
+        </div>
+        <h1 class="uni-name">Mbarara University of Science and Technology</h1>
+        <span class="badge">Online Application Portal</span>
+
+        <div class="card">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Log in to access your application dashboard</p>
+
+            <form id="loginForm">
+                <label for="email">Email Address</label>
+                <div class="input-group">
+                    <span class="addon"><i class="fa-solid fa-envelope"></i></span>
+                    <input type="email" id="email" required>
+                </div>
+
+                <label for="password">Password</label>
+                <div class="input-group">
+                    <span class="addon"><i class="fa-solid fa-lock"></i></span>
+                    <input type="password" id="password" required>
+                    <button type="button" class="eye" id="togglePw" aria-label="Show or hide password">
+                        <i class="fa-solid fa-eye-slash"></i>
+                    </button>
+                </div>
+
+                <button type="submit" class="btn-signin">
+                    <i class="fa-solid fa-right-to-bracket"></i> Sign In
+                </button>
+            </form>
+
+            <a href="#" class="forgot"><i class="fa-solid fa-key"></i> Forgot your password?</a>
+
+            <div class="divider"><span>New to the portal?</span></div>
+
+            <div class="btn-row">
+                <a href="#" class="btn-outline blue" id="openModal"><i class="fa-solid fa-user-plus"></i> Create Account</a>
+                <a href="#" class="btn-outline grey"><i class="fa-solid fa-circle-question"></i> How to Apply</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay">
+        <div class="modal">
+            <div class="modal-head">
+                <div>
+                    <h3>Create Account</h3>
+                    <p>Provide your details to receive a temporary password.</p>
+                </div>
+                <button type="button" class="x-btn" id="xClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <form id="registerForm">
+                <div class="modal-body">
+                    <label for="surname">Surname</label>
+                    <div class="input-group">
+                        <span class="addon"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" id="surname" placeholder="Surname" required>
+                    </div>
+
+                    <label for="othernames">Other Names</label>
+                    <div class="input-group">
+                        <span class="addon"><i class="fa-solid fa-user-pen"></i></span>
+                        <input type="text" id="othernames" placeholder="Other names" required>
+                    </div>
+
+                    <label for="phone">Phone Number</label>
+                    <div class="phone-row">
+                        <select id="country">
+                            <option>Uganda (+256)</option>
+                            <option>Kenya (+254)</option>
+                            <option>Tanzania (+255)</option>
+                            <option>Rwanda (+250)</option>
+                            <option>Burundi (+257)</option>
+                            <option>South Sudan (+211)</option>
+                        </select>
+                        <div class="input-group">
+                            <span class="addon"><i class="fa-solid fa-phone"></i></span>
+                            <input type="tel" id="phone" placeholder="0770000000" required>
+                        </div>
+                    </div>
+                    <small class="hint">Use an active phone number to receive notifications.</small>
+
+                    <label for="regEmail">Email Address</label>
+                    <div class="input-group">
+                        <span class="addon"><i class="fa-solid fa-envelope"></i></span>
+                        <input type="email" id="regEmail" placeholder="myemail@gmail.com" required>
+                    </div>
+                    <a href="#" class="create-email">Don't have an Email? Click to create <i class="fa-solid fa-circle-arrow-right"></i></a>
+                </div>
+
+                <div class="modal-foot">
+                    <button type="button" class="btn-close" id="closeBtn">Close</button>
+                    <button type="submit" class="btn-create"><i class="fa-solid fa-user-plus"></i> Create Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="misa">
+        <div class="misa-msg">Hello! I am MISA, your helpful assistant.<br>How can I help you today?</div>
+        <button class="misa-btn"><i class="fa-solid fa-robot"></i> ASK MISA</button>
+    </div>
+
+    <script>
+        var pw = document.getElementById("password");
+        var icon = document.querySelector("#togglePw i");
+        document.getElementById("togglePw").onclick = function () {
+            var hidden = pw.type === "password";
+            pw.type = hidden ? "text" : "password";
+            icon.className = hidden ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
+        };
+        document.getElementById("loginForm").onsubmit = function (e) {
+            e.preventDefault();
+            alert("Login form submitted (demo only).");
+        };
+
+        var overlay = document.getElementById("overlay");
+        function openModal(e) { if (e) e.preventDefault(); overlay.classList.add("show"); document.getElementById("surname").focus(); }
+        function closeModal() { overlay.classList.remove("show"); }
+        document.getElementById("openModal").onclick = openModal;
+        document.getElementById("xClose").onclick = closeModal;
+        document.getElementById("closeBtn").onclick = closeModal;
+        overlay.onclick = function (e) { if (e.target === overlay) closeModal(); };
+        document.getElementById("registerForm").onsubmit = function (e) {
+            e.preventDefault();
+            alert("Account creation submitted (demo only).");
+            closeModal();
+        };
+    </script>
+</body>
+</html>
